@@ -6,6 +6,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsItem>
 
+#define OBJ_SIZE    50
 #define GAME_WIDTH  500
 #define GAME_HEIGHT 700
 #define GAME_TITLE "Doodle JuJuJump"
@@ -23,7 +24,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 {
    // ui->setupUi(this);
-  //  BackgroundPixmap=BackgroundPixmap.scaled(400,400);
 
     InitialScene();
 }
@@ -34,12 +34,16 @@ MainWindow::~MainWindow()
  //   delete ui;
 }
 
+
 void MainWindow::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
   //   QPainter painter_2(this);
     painter.drawPixmap(this->rect(),BackgroundPixmap_1);
     painter.drawPixmap(this->rect(),BackgroundPixmap_2);
+    Player=Player.scaled(OBJ_SIZE,OBJ_SIZE,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
+    painter.drawPixmap(GAME_WIDTH/2,GAME_HEIGHT*0.8,Player);
+
 
 }
 
@@ -48,5 +52,13 @@ void MainWindow::InitialScene()
 //    MainWindow::PaintEvent(&BackgroundPixmap);
     setFixedSize(GAME_WIDTH,GAME_HEIGHT);
     setWindowTitle(GAME_TITLE);
+
+
+
+
+}
+
+void MainWindow::Shoot()
+{
 
 }
