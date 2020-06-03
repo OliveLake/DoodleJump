@@ -5,8 +5,8 @@
 #include <QMainWindow>
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QGraphicsItem>
 #include <QGraphicsPixmapItem>
-
 
 //namespace Ui {
 //class MainWindow;
@@ -32,7 +32,8 @@ private:
  //   Ui::MainWindow *ui;
     QPixmap BackgroundPixmap;
  //   QPixmap BackgroundPixmap_2;
-    QPixmap Player;
+    QPixmap PlayerPixmap;
+    QGraphicsItem *Player;
   //  QRect p_rect;
 
 
@@ -42,6 +43,7 @@ private:
 
     int p_x;
     int p_y;
+
 };
 
 #endif // MAINWINDOW_H

@@ -1,13 +1,12 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <QPixmap>
+#include <QKeyEvent>
 
 class Player
 {
 public:
-    void shoot();
-
+    void keyPressEvent(QKeyEvent * event);
 private:
    // QPixmap Player;
 

@@ -1,9 +1,11 @@
 #include "mainwindow.h"
+#include "player.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QTimer>
-#include <QPainterPath>
-#include <QImage>
+#include <QKeyEvent>
+//#include <QPainterPath>
+//#include <QImage>
 
 #define JUMPHIGH    100
 #define OBJ_SIZE    50
@@ -18,16 +20,29 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , BackgroundPixmap(":/new/prefix1/image/temp1406589445.png")
-    , Player(":/new/prefix1/image/pngwing.com.png")
+    , PlayerPixmap(":/new/prefix1/image/pngwing.com.png")
     , scene(new QGraphicsScene())
     , view(new QGraphicsView(scene))
- //   , item(new QGraphicsPixmapItem)
+  //  , Player(new QGraphicsItem ())
 
 
 {
+    p_x = GAME_WIDTH/2;
+    p_y = GAME_HEIGHT*0.8;
+
+    //set scene
      resize(GAME_WIDTH,GAME_HEIGHT);
  //   setFixedSize(GAME_WIDTH,GAME_HEIGHT);
     scene->addPixmap(BackgroundPixmap);
+
+    //set player
+   // item = new QGraphicsItem();
+    QGraphicsItem *item = new QGraphicsItem();
+
+    scene->addPixmap(PlayerPixmap);
+
+  //  Player->setPixmap(QPixmap(":/images/player.png"));
+
    // ad(QPixmap(":/images/player.png"));
  //   QImage *JBackground = new QImage(":/new/prefix1/image/temp1406589445.png");
  //   QImage Background = JBackground->scaled(GAME_WIDTH,GAME_HEIGHT,Qt::KeepAspectRatio);
@@ -53,13 +68,17 @@ void MainWindow::paintEvent(QPaintEvent *)
   //   QPainter painter_2(this);
     painter.drawPixmap(0,0,GAME_WIDTH,GAME_HEIGHT,BackgroundPixmap);
  //   painter.drawPixmap(this->rect(),BackgroundPixmap_2);
- //   Player=Player.scaled(OBJ_SIZE,OBJ_SIZE,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
- //   painter.drawPixmap(p_x,p_y,Player);
+    PlayerPixmap=PlayerPixmap.scaled(OBJ_SIZE,OBJ_SIZE,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
+    painter.drawPixmap(p_x,p_y,PlayerPixmap);
     // rec
+}
 
-
-
-
+void Player::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Left)
+    {
+      //  setPos()
+    }
 }
 
 
