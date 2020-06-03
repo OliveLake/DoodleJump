@@ -1,29 +1,44 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+//#include <QTimer>
 #include <QMainWindow>
+#include <QGraphicsView>
+#include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
 
-namespace Ui {
-class MainWindow;
-}
+
+//namespace Ui {
+//class MainWindow;
+//}
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    void paintEvent(QPaintEvent *);
-    void InitialScene();
-    void Shoot();
+    MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void paintEvent(QPaintEvent *);
+//    void InitialScene();
+//    void GamePlay();
+//    void Shoot();
+//    void UpdatePos();
+//    void PlayerPos();
+ //   QTimer   m_Timer;
 
 
 private:
  //   Ui::MainWindow *ui;
-    QPixmap BackgroundPixmap_1;
-    QPixmap BackgroundPixmap_2;
+    QPixmap BackgroundPixmap;
+ //   QPixmap BackgroundPixmap_2;
     QPixmap Player;
+  //  QRect p_rect;
+
+
+    QGraphicsScene *scene;
+    QGraphicsView *view;
+//    QGraphicsPixmapItem *item;
 
     int p_x;
     int p_y;
