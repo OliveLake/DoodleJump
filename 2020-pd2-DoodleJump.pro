@@ -28,12 +28,10 @@ SOURCES += \
         Player.cpp \
         main.cpp \
         mainwindow.cpp \
-        player.cpp
 
 HEADERS += \
         Player.h \
         mainwindow.h \
-        player.h
 
 FORMS += \
         mainwindow.ui
@@ -45,3 +43,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     image.qrc
+
+LIBS += -framework AppKit
+LIBS += -framework CoreAudio
+LIBS += -framework AudioToolbox

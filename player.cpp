@@ -7,7 +7,7 @@
 Player::Player(QGraphicsItem *parent): QGraphicsRectItem(parent){
 
 }
-/*
+
 void Player::keyPressEvent(QKeyEvent *event){
     // move the player left and right
     if (event->key() == Qt::Key_Left){
@@ -21,13 +21,14 @@ void Player::keyPressEvent(QKeyEvent *event){
     // shoot with the spacebar
     else if (event->key() == Qt::Key_Space){
         // create a bullet
-        Bullet * bullet = new Bullet();
-        bullet->setPos(x(),y());
-        scene()->addItem(bullet);
+ //       Bullet * bullet = new Bullet();
+ //       bullet->setPos(x(),y());
+ //       scene()->addItem(bullet);
     }
 }
 
 void Player::spawn(){
     // create an enemy
-    Enemy * enemy = new Enemy();
-    scene()->addItem(enemy);*/
+//    Enemy * enemy = new Enemy();
+ //   scene()->addItem(enemy);
+}
