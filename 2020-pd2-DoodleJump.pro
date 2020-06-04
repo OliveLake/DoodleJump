@@ -25,10 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        Player.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        player.cpp
 
 HEADERS += \
+        Player.h \
         mainwindow.h \
         player.h
 

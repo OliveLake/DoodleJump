@@ -1,11 +1,13 @@
 #include "mainwindow.h"
 #include "player.h"
+
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QTimer>
 #include <QKeyEvent>
 //#include <QPainterPath>
 //#include <QImage>
+
 
 #define JUMPHIGH    100
 #define OBJ_SIZE    50
@@ -23,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     , PlayerPixmap(":/new/prefix1/image/pngwing.com.png")
     , scene(new QGraphicsScene())
     , view(new QGraphicsView(scene))
-  //  , Player(new QGraphicsItem ())
+//    , player(new Player(*this))
 
 
 {
@@ -37,9 +39,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     //set player
    // item = new QGraphicsItem();
-    QGraphicsItem *item = new QGraphicsItem();
+ //   QGraphicsItem *item = new QGraphicsItem();
+
 
     scene->addPixmap(PlayerPixmap);
+
+//    player = new Player();
+
 
   //  Player->setPixmap(QPixmap(":/images/player.png"));
 
@@ -77,7 +83,7 @@ void Player::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Left)
     {
-      //  setPos()
+      //Player->setPos(0,0);
     }
 }
 
