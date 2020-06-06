@@ -1,30 +1,51 @@
 #include "mainwindow.h"
 #include <QTimer>
 #include <QGraphicsTextItem>
+#include <QBrush>
 #include <QFont>
+#include <QImage>
 //#include "Enemy.h"
 
-MainWindow::MainWindow(QWidget *parent){
+
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent),
+    scene(new QGraphicsScene(this))
+  //  view(new QGraphicsView(scene, this))
+   // , scene(new QGraphicsScene())
+  //  , view(new QGraphicsView(scene))
+  //    , BackgroundPixmap(":/new/prefix1/image/temp1406589445.png")
+
+
+{
     // create the scene
-    scene = new QGraphicsScene();
+    view = new QGraphicsView();
+  //  scene = new QGraphicsScene();
     scene->setSceneRect(0,0,800,600); // make the scene 800x600 instead of infinity by infinity (default)
+  //  resize(GAME_WIDTH,GAME_HEIGHT);
+    scene->setBackgroundBrush(QBrush(QImage(":/new/prefix1/image/temp1406589445.png")));
+
+
+
 
     // make the newly created scene the scene to visualize (since Game is a QGraphicsView Widget,
     // it can be used to visualize scenes)
-    setScene(scene);
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(800,600);
+  //  view->setScene(scene);
+//    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+//    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setFixedSize(GAME_WIDTH,GAME_HEIGHT);
+    view->setScene(scene);
+
 
     // create the player
-    player = new Player();
-    player->setRect(0,0,100,100); // change the rect from 0x0 (default) to 100x100 pixels
-    player->setPos(400,500); // TODO generalize to always be in the middle bottom of screen
+  //  player = new Player();
+ //   player->setPos(400,500); // TODO generalize to always be in the middle bottom of screen
     // make the player focusable and set it to be the current focus
-    player->setFlag(QGraphicsItem::ItemIsFocusable);
-    player->setFocus();
+ //   player->setFlag(QGraphicsItem::ItemIsFocusable);
+ //   player->setFocus();
     // add the player to the scene
-    scene->addItem(player);
+  //  scene->addItem(player);
+ //   scene->addRect(0,0,50,50);
 
     // create the score/health
 /*    score = new Score();
@@ -38,7 +59,19 @@ MainWindow::MainWindow(QWidget *parent){
     QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
     timer->start(2000);
 */
-    show();
+ //   view->show();
+}
+
+void MainWindow::paintEvent(QPaintEvent *)
+{
+
+    QPainter painter(this);
+  //   QPainter painter_2(this);
+ //   painter.drawPixmap(0,0,GAME_WIDTH,GAME_HEIGHT,BackgroundPixmap);
+ //   painter.drawPixmap(this->rect(),BackgroundPixmap_2);
+ //   PlayerPixmap=PlayerPixmap.scaled(OBJ_SIZE,OBJ_SIZE,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
+ //   painter.drawPixmap(p_x,p_y,PlayerPixmap);
+    // rec
 }
 
 
