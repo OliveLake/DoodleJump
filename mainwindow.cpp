@@ -9,42 +9,50 @@
 
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent),
-    scene(new QGraphicsScene(this))
+    : QMainWindow(parent)
+    ,view(new QGraphicsView(this))
+    ,scene(new QGraphicsScene(this))
   //  view(new QGraphicsView(scene, this))
    // , scene(new QGraphicsScene())
   //  , view(new QGraphicsView(scene))
-  //    , BackgroundPixmap(":/new/prefix1/image/temp1406589445.png")
+      , BackgroundPixmap(":/new/prefix1/image/temp1406589445.png")
 
 
 {
+  //  item = QGraphicsPixmapItem(QPixmap(":/new/prefix1/image/temp1406589445.png"));
+
     // create the scene
-    view = new QGraphicsView();
+   // view = new QGraphicsView();
   //  scene = new QGraphicsScene();
-    scene->setSceneRect(0,0,800,600); // make the scene 800x600 instead of infinity by infinity (default)
-  //  resize(GAME_WIDTH,GAME_HEIGHT);
     scene->setBackgroundBrush(QBrush(QImage(":/new/prefix1/image/temp1406589445.png")));
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    resize(GAME_WIDTH,GAME_HEIGHT);
+
+    view->setSceneRect(0,0,GAME_WIDTH,GAME_HEIGHT); // make the scene 800x600 instead of infinity by infinity (default)
+   view->setFixedSize(GAME_WIDTH,GAME_HEIGHT);
 
 
 
 
     // make the newly created scene the scene to visualize (since Game is a QGraphicsView Widget,
     // it can be used to visualize scenes)
-  //  view->setScene(scene);
+    view->setScene(scene);
 //    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 //    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(GAME_WIDTH,GAME_HEIGHT);
-    view->setScene(scene);
 
+ //   view->setScene(scene);
+
+ //   scene->addPixmap(BackgroundPixmap);
 
     // create the player
-  //  player = new Player();
- //   player->setPos(400,500); // TODO generalize to always be in the middle bottom of screen
+    player = new Player();
+    player->setPos(0,0); // TODO generalize to always be in the middle bottom of screen
     // make the player focusable and set it to be the current focus
- //   player->setFlag(QGraphicsItem::ItemIsFocusable);
- //   player->setFocus();
+    player->setFlag(QGraphicsItem::ItemIsFocusable);
+    player->setFocus();
     // add the player to the scene
-  //  scene->addItem(player);
+    scene->addItem(player);
  //   scene->addRect(0,0,50,50);
 
     // create the score/health

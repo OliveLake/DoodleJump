@@ -2,6 +2,7 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <QDebug>
+#include <QPainter>
 //#include "Bullet.h"
 //#include "Enemy.h"
 
@@ -9,9 +10,18 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 {
     p_x = GAME_WIDTH*0.5; p_y = GAME_HEIGHT*0.8;
     QPixmap PlayerPixmap(":/new/prefix1/image/pngwing.com.png");
-    setPixmap(PlayerPixmap);
+ //   PlayerPixmap.scaled(QSize(OBJ_SIZE,OBJ_SIZE),Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
     qDebug()<<"playerset";
 //    setOffset(p_x,p_y);
+//    QPixmap scaled = PlayerPixmap.scaled(QSize(10, 10));
+//    QPainter painter(this);
+//    painter.drawPixmap(0, 0, scaled)
+ //   QBrush brush(PlayerPixmap.scaled(2, 2, Qt::IgnoreAspectRatio,
+ //                           Qt::FastTransformation));
+    QPixmap pic(QPixmap(PlayerPixmap).scaled(OBJ_SIZE, OBJ_SIZE, Qt::IgnoreAspectRatio,
+                                         Qt::FastTransformation));
+    setPixmap(pic);
+
 }
 
 

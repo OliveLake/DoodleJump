@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
 
 #include "Constants.h"
 #include "player.h"
@@ -25,7 +26,7 @@ private:
  //   Health * health;
 
     QPixmap BackgroundPixmap;
-
+    QGraphicsPixmapItem item;
 };
 
 #endif // GAME_H
