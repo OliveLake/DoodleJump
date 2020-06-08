@@ -15,8 +15,7 @@ public:
 public slots:
     void spawn();
 private:
-    int p_x;
-    int p_y;
+
 };
 
 #endif // PLAYER_H

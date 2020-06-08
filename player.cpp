@@ -8,7 +8,6 @@
 
 Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 {
-    p_x = GAME_WIDTH*0.5; p_y = GAME_HEIGHT*0.8;
     QPixmap PlayerPixmap(":/new/prefix1/image/pngwing.com.png");
  //   PlayerPixmap.scaled(QSize(OBJ_SIZE,OBJ_SIZE),Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
     qDebug()<<"playerset";

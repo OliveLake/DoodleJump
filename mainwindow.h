@@ -27,6 +27,9 @@ private:
 
     QPixmap BackgroundPixmap;
     QGraphicsPixmapItem item;
+
+    int p_x;
+    int p_y;
 };
 
 #endif // GAME_H

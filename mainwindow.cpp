@@ -4,7 +4,6 @@
 #include <QBrush>
 #include <QFont>
 #include <QImage>
-//#include "Enemy.h"
 
 
 
@@ -46,8 +45,9 @@ MainWindow::MainWindow(QWidget *parent)
  //   scene->addPixmap(BackgroundPixmap);
 
     // create the player
+    p_x = GAME_WIDTH*0.5; p_y = GAME_HEIGHT*0.8;
     player = new Player();
-    player->setPos(0,0); // TODO generalize to always be in the middle bottom of screen
+    player->setPos(p_x,p_y); // TODO generalize to always be in the middle bottom of screen
     // make the player focusable and set it to be the current focus
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
