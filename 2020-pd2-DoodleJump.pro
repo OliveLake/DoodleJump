@@ -25,11 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    Bullet.cpp \
         Player.cpp \
         main.cpp \
         mainwindow.cpp \
 
 HEADERS += \
+    Bullet.h \
     Constants.h \
         Player.h \
         mainwindow.h \

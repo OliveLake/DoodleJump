@@ -5,6 +5,8 @@
 #include <QWidget>
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QObject>
+
 #include <QGraphicsPixmapItem>
 
 #include "Constants.h"
@@ -12,11 +14,15 @@
 //#include "Score.h"
 //#include "Health.h"
 
-class MainWindow: public QMainWindow
+class MainWindow:public QMainWindow
 {
 public:
     MainWindow(QWidget * parent=0);
     void paintEvent(QPaintEvent *);
+
+public slots:
+    void AutoJump(int if_jump);
+
 
 private:
     QGraphicsView *view;

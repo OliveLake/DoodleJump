@@ -14,6 +14,7 @@ public:
     void keyPressEvent(QKeyEvent * event);
 public slots:
     void spawn();
+    void AutoJump(int if_jump);
 private:
 
 };

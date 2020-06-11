@@ -4,7 +4,9 @@
 #include <QBrush>
 #include <QFont>
 #include <QImage>
-
+//bonus
+//反轉圖片
+//射子彈圖片反轉
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -14,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
   //  view(new QGraphicsView(scene, this))
    // , scene(new QGraphicsScene())
   //  , view(new QGraphicsView(scene))
-      , BackgroundPixmap(":/new/prefix1/image/temp1406589445.png")
+    , BackgroundPixmap(":/new/prefix1/image/temp1406589445.png")
 
 
 {
@@ -28,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     resize(GAME_WIDTH,GAME_HEIGHT);
 
-    view->setSceneRect(0,0,GAME_WIDTH,GAME_HEIGHT); // make the scene 800x600 instead of infinity by infinity (default)
+    view->setSceneRect(0,0,GAME_WIDTH,GAME_HEIGHT); //讓視窗固定// make the scene 800x600 instead of infinity by infinity (default)
    view->setFixedSize(GAME_WIDTH,GAME_HEIGHT);
 
 
@@ -53,6 +55,8 @@ MainWindow::MainWindow(QWidget *parent)
     player->setFocus();
     // add the player to the scene
     scene->addItem(player);
+
+
  //   scene->addRect(0,0,50,50);
 
     // create the score/health
@@ -68,7 +72,11 @@ MainWindow::MainWindow(QWidget *parent)
     timer->start(2000);
 */
  //   view->show();
+
+
 }
+
+
 
 void MainWindow::paintEvent(QPaintEvent *)
 {

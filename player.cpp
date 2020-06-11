@@ -2,8 +2,8 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <QDebug>
-#include <QPainter>
-//#include "Bullet.h"
+#include <QTimer>
+#include "Bullet.h"
 //#include "Enemy.h"
 
 Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
@@ -17,13 +17,16 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 //    painter.drawPixmap(0, 0, scaled)
  //   QBrush brush(PlayerPixmap.scaled(2, 2, Qt::IgnoreAspectRatio,
  //                           Qt::FastTransformation));
-    QPixmap pic(QPixmap(PlayerPixmap).scaled(OBJ_SIZE, OBJ_SIZE, Qt::IgnoreAspectRatio,
-                                         Qt::FastTransformation));
+    QPixmap pic(QPixmap(PlayerPixmap).scaled(OBJ_SIZE, OBJ_SIZE, Qt::IgnoreAspectRatio,Qt::FastTransformation));
     setPixmap(pic);
+
 
 }
 
+void Player::AutoJump(int if_jump)
+{
 
+}
 
 void Player::keyPressEvent(QKeyEvent *event){
     // move the player left and right
@@ -38,9 +41,9 @@ void Player::keyPressEvent(QKeyEvent *event){
     // shoot with the spacebar
     else if (event->key() == Qt::Key_Space){
         // create a bullet
- //       Bullet * bullet = new Bullet();
- //       bullet->setPos(x(),y());
- //       scene()->addItem(bullet);
+        Bullet * bullet = new Bullet();
+        bullet->setPos(x(),y());
+        scene()->addItem(bullet);
     }
 }
 
