@@ -1,12 +1,17 @@
 #include "mainwindow.h"
+#include "player.h"
 #include <QTimer>
 #include <QGraphicsTextItem>
 #include <QBrush>
 #include <QFont>
 #include <QImage>
+#include <QDebug>
+
 //bonus
 //反轉圖片
 //射子彈圖片反轉
+//done
+//可穿牆
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -47,9 +52,10 @@ MainWindow::MainWindow(QWidget *parent)
  //   scene->addPixmap(BackgroundPixmap);
 
     // create the player
-    p_x = GAME_WIDTH*0.5; p_y = GAME_HEIGHT*0.8;
+    p_x = GAME_WIDTH*0.5; p_y = GAME_HEIGHT*0.5;
     player = new Player();
     player->setPos(p_x,p_y); // TODO generalize to always be in the middle bottom of screen
+    qDebug()<<y();
     // make the player focusable and set it to be the current focus
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
@@ -65,12 +71,15 @@ MainWindow::MainWindow(QWidget *parent)
     health = new Health();
     health->setPos(health->x(),health->y()+25);
     scene->addItem(health);
-
-    // spawn enemies
-    QTimer * timer = new QTimer();
-    QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
-    timer->start(2000);
 */
+    // spawn enemies
+//    QTimer * timer = new QTimer();
+//    QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
+//    timer->start(0);
+
+    for(int i = 0;i<12;i++)
+        player->iniPlatform();
+
  //   view->show();
 
 

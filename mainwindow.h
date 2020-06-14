@@ -24,6 +24,7 @@ public slots:
     void AutoJump(int if_jump);
 
 
+
 private:
     QGraphicsView *view;
     QGraphicsScene *scene;

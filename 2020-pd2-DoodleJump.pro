@@ -26,6 +26,7 @@ CONFIG += c++11
 
 SOURCES += \
     Bullet.cpp \
+    Platform.cpp \
         Player.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -33,6 +34,7 @@ SOURCES += \
 HEADERS += \
     Bullet.h \
     Constants.h \
+    Platform.h \
         Player.h \
         mainwindow.h \
 
