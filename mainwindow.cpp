@@ -77,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent)
 //    QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
 //    timer->start(0);
 
-    for(int i = 0;i<12;i++)
+    for(int i = 0;i<6;i++)
         player->iniPlatform();
 
  //   view->show();

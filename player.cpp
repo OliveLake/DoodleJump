@@ -20,6 +20,7 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
     QPixmap pic(QPixmap(PlayerPixmap).scaled(OBJ_SIZE, OBJ_SIZE, Qt::IgnoreAspectRatio,Qt::FastTransformation));
     setPixmap(pic);
 
+    JUMPHIGH = 5;
     count = 0;
     QTimer * timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(AutoJump()));
@@ -34,8 +35,48 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 
 void Player::AutoJump()
 {
+    JUMPHIGH = 5;
+    state = 1;
+    if(count<=40 && state==1)   //up
+    {
+        setPos(x(),y()+JUMPHIGH);
+        count++;
 
+    }
+    state = 0;
+    if(count>40 && count<=80 && state==0)  //down
+    {
+        setPos(x(),y()-JUMPHIGH);
+        count++;
+
+    }
+    if(count>80)
+    {
+        count = 1;
+        state = 1;
+    }
    // qDebug()<<"Jump"<<count;
+
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+    {
+            if (typeid(*(colliding_items[i])) == typeid(Platform) && state==0)  //down
+            {
+                qDebug()<<"coll";
+                JUMPHIGH = 0;
+
+             //   jump();
+             //   timer->stop();
+
+            }
+    }
+
+
+
+}
+
+void Player::jump()
+{
     if(count<=40)
     {
         setPos(x(),y()+JUMPHIGH);
@@ -83,4 +124,9 @@ void Player::iniPlatform()
 {
     Platform * platform = new Platform();
     scene()->addItem(platform);
+}
+
+void Player::standup()
+{
+    QList<QGraphicsItem *> colliding_items = collidingItems();
 }

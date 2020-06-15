@@ -13,11 +13,15 @@ public:
     Player(QGraphicsItem * parent=0);
     void keyPressEvent(QKeyEvent * event);
     void iniPlatform();
+    void standup();
+    void jump();
 public slots:
     void spawn();
     void AutoJump();
 private:
     int count;
+    int state;
+    int JUMPHIGH;
 
 };
 
