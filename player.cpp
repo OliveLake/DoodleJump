@@ -5,6 +5,7 @@
 #include <QTimer>
 #include "Bullet.h"
 #include "Platform.h"
+#include "Transparent.h"
 
 Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 {
@@ -20,76 +21,73 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
     QPixmap pic(QPixmap(PlayerPixmap).scaled(OBJ_SIZE, OBJ_SIZE, Qt::IgnoreAspectRatio,Qt::FastTransformation));
     setPixmap(pic);
 
+//    colliding_items = collidingItems();
+
     JUMPHIGH = 5;
     count = 0;
+    state = 1;
     QTimer * timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(AutoJump()));
+    connect(timer,SIGNAL(timeout()),this,SLOT(move()));
     timer->start(JUMPRATE);
 
+          //  qDebug()<<state;
 
 
 
 }
 
 //用火箭的時候自動跳躍要暫停
-
-void Player::AutoJump()
+void Player::move()
 {
-    JUMPHIGH = 5;
-    state = 1;
-    if(count<=40 && state==1)   //up
+  //  qDebug()<<state;
+    JumpColliding();
+    switch (state)
     {
-        setPos(x(),y()+JUMPHIGH);
-        count++;
+        case 1:
+        {
+           // qDebug()<<"state 1";
+            if(count<=40 && state==1)   //up
+            {
+                setPos(x(),y()-JUMPHIGH);
+                count++;
+            }
+           if(count==40) state = 2;
+           break;
+        }
 
-    }
-    state = 0;
-    if(count>40 && count<=80 && state==0)  //down
-    {
-        setPos(x(),y()-JUMPHIGH);
-        count++;
+        case 2:
+        {
+            setPos(x(),y()+JUMPHIGH);
 
+            break;
+        }
     }
-    if(count>80)
-    {
-        count = 1;
-        state = 1;
-    }
-   // qDebug()<<"Jump"<<count;
-
-    QList<QGraphicsItem *> colliding_items = collidingItems();
+}
+void Player::JumpColliding()
+{
+     QList<QGraphicsItem *> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
     {
-            if (typeid(*(colliding_items[i])) == typeid(Platform) && state==0)  //down
+            if (typeid(*(colliding_items[i])) == typeid(Transparent) && state==2)  //down
             {
                 qDebug()<<"coll";
-                JUMPHIGH = 0;
+                count = 0;
+                state = 1;
+                //碰撞到板子 count=0 上升碰到平台return
+              //  AutoJump();
+          //      JUMPHIGH = 0;
 
              //   jump();
              //   timer->stop();
 
             }
+            //switch ()
     }
 
 
 
 }
 
-void Player::jump()
-{
-    if(count<=40)
-    {
-        setPos(x(),y()+JUMPHIGH);
-        count++;
-    }
-    else if(count>40 && count<=80)
-    {
-        setPos(x(),y()-JUMPHIGH);
-        count++;
-    }
-    if(count>80)    count = 1;
-
-}
 
 void Player::keyPressEvent(QKeyEvent *event){
     // move the player left and right
@@ -120,13 +118,20 @@ void Player::spawn(){
     scene()->addItem(platform);
 }
 
-void Player::iniPlatform()
+Platform* Player::iniPlatform(int x,int y)  //  改回傳值
 {
     Platform * platform = new Platform();
-    scene()->addItem(platform);
+  //  p[0] = new Platform()
+    platform->setPos(x,y);
+    scene()->addItem(platform); //把平台存在陣列   a[0].y();
+    return platform;
 }
 
-void Player::standup()
+Transparent* Player::iniCollingRect(int x, int y)
 {
-    QList<QGraphicsItem *> colliding_items = collidingItems();
+    Transparent* collidingrect = new Transparent();
+    collidingrect->setPos(x,y);
+    scene()->addItem(collidingrect);
+    return collidingrect;
 }
+

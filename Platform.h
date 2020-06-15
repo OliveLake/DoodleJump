@@ -9,6 +9,7 @@ class Platform: public QObject,public QGraphicsPixmapItem{
     Q_OBJECT
 public:
     Platform(QGraphicsItem * parent=0);
+
 public slots:
   //  void move();
 };

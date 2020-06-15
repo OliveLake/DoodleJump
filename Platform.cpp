@@ -8,12 +8,12 @@
 Platform::Platform(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
 
-    int RandomHeight = rand() % GAME_HEIGHT;
-    int RandomWidth = rand() % GAME_WIDTH-50;
 
 
-    qDebug()<<RandomWidth<<RandomHeight;
-    setPos(RandomWidth,RandomHeight);
+    //另創一個clss coolidform 生成透明長方形 座標年在板子上 碰撞家在長方形 繼承platform 使用autojump
+
+   // qDebug()<<RandomWidth<<RandomHeight;
+   // setPos(RandomWidth,RandomHeight);
 
     setPixmap(QPixmap(":/new/prefix1/image/platforms_green.png"));
 
@@ -23,3 +23,4 @@ Platform::Platform(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent
    // timer->start(50);
 
 }
+//移動的函數 每一次都要確定最後y是否低於底部

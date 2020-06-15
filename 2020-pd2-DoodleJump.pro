@@ -28,6 +28,7 @@ SOURCES += \
     Bullet.cpp \
     Platform.cpp \
         Player.cpp \
+    Transparent.cpp \
         main.cpp \
         mainwindow.cpp \
 
@@ -36,6 +37,7 @@ HEADERS += \
     Constants.h \
     Platform.h \
         Player.h \
+    Transparent.h \
         mainwindow.h \
 
 FORMS += \
