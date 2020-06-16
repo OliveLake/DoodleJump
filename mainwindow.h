@@ -6,6 +6,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QObject>
+#include <QPushButton>
 
 #include <QGraphicsPixmapItem>
 
@@ -37,6 +38,7 @@ private:
     QPixmap BackgroundPixmap;
     QGraphicsPixmapItem item;
 
+    QPushButton *Btn;
     int p_x;
     int p_y;
 

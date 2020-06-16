@@ -45,27 +45,30 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 //用火箭的時候自動跳躍要暫停
 void Player::move()
 {
+    //鑑測鍵盤狀態
     if(y()<200)  //while裡面一個for?
     {
         dy = 300-y();
         qDebug()<<"dy"<<dy;
         for(int i = 0;i<10;i++)
         {
-            for(int j = 0;j<5;j++)
-            {
+            //for(int j = 0;j<10;j++)
+           // {
 
-                p[i]->setY(p[i]->y()+JUMPHIGH);
-                CollidingRect[i]->setY(CollidingRect[i]->y()+JUMPHIGH);
-                setY(y()+JUMPHIGH);
-              //  qDebug()<<y();
-            }
+                p[i]->setY(p[i]->y()+1);
+                CollidingRect[i]->setY(CollidingRect[i]->y()+1);
+
+          //  }
             if(CollidingRect[i]->y()>GAME_HEIGHT)
             {
                 int High = 700;
                 int RandomWidth = rand() % GAME_WIDTH-50;
             }
-        }
 
+        }
+//state = 2;
+        setY(y()+1);
+      //  qDebug()<<y();
     }
     if(y()>500)
     {
@@ -106,9 +109,11 @@ void Player::JumpColliding()
                 //qDebug()<<"coll";
                 count = 0;
                 state = 1;
-/*                QMediaPlayer * music = new QMediaPlayer();
-                music->setMedia(QUrl(":/sound/image/jumpSound.mp3"));
-                music->setVolume(1000);
+                QMediaPlayer * music = new QMediaPlayer();
+         //       music->setMedia(QUrl(":/sound/image/jumpSound.mp3"));
+                music->setMedia(QUrl::fromLocalFile("/Users/User/Desktop/C++/2020-pd2-doodlejump/image/jumpSound.mp3"));
+                music->play();
+                music->setVolume(100);/*
                 if (music->state() == QMediaPlayer::PlayingState)
                 {
                       music->setPosition(0);
@@ -117,12 +122,13 @@ void Player::JumpColliding()
                 {
                     qDebug()<<"play";
                       music->play();
-                }*/
+                }/*
                 QSoundEffect *sound;
                 sound = new QSoundEffect(this);
                 sound->setSource( QUrl(":/sound/image/jumpSound.mp3") );
-                sound->setVolume(10000);
+                sound->setVolume(100);
                 sound->play();
+                */
                // music->play();
                 //碰撞到板子 count=0 上升碰到平台return
             }

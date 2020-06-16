@@ -3,6 +3,6 @@
 
 Transparent::Transparent(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
 {
-    setRect(0,0,80,1);
+    setRect(0,0,40,1);
 
 }

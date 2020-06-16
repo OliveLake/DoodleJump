@@ -23,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 {
 
+    Btn=new QPushButton(QString("按鈕名稱"),this);
+ //   connect(Btn,SIGNAL(clicked()),this,SLOT(onBtnClicked()));
     scene->setBackgroundBrush(QBrush(QImage(":/new/prefix1/image/temp1406589445.png")));
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -67,11 +69,12 @@ MainWindow::MainWindow(QWidget *parent)
 
         player->p[i] = player->iniPlatform(RandomWidth,High) ;
   //      qDebug()<<player->p[i]->x()<<player->p[i]->y();
-        player->CollidingRect[i] = player->iniCollingRect(player->p[i]->x()+30,player->p[i]->y()+20);
+        player->CollidingRect[i] = player->iniCollingRect(player->p[i]->x()+60,player->p[i]->y()+20);
         High -=70;
         RandomWidth = rand() % GAME_WIDTH-50;
 
     }
+
 
  //   view->show();
 
