@@ -40,8 +40,8 @@ private:
     int p_x;
     int p_y;
 
-    Platform* p[12];
-    Transparent* CollidingRect[12];
+//    Platform* p[12];
+//    Transparent* CollidingRect[12];
 
 };
 

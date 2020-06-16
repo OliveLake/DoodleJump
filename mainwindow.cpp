@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
     view->setScene(scene);
 
     // create the player
-    p_x = GAME_WIDTH*0.5; p_y = GAME_HEIGHT*0.5;
+    p_x = GAME_WIDTH*0.5; p_y = GAME_HEIGHT*0.7;
     player = new Player();
     player->setPos(p_x,p_y); // TODO generalize to always be in the middle bottom of screen
     //qDebug()<<y();
@@ -65,9 +65,9 @@ MainWindow::MainWindow(QWidget *parent)
     for(int i = 0;i<10;i++)
     {
 
-        p[i] = player->iniPlatform(RandomWidth,High) ;
-        qDebug()<<p[i]->x()<<p[i]->y();
-        CollidingRect[i] = player->iniCollingRect(p[i]->x()+30,p[i]->y()+20);
+        player->p[i] = player->iniPlatform(RandomWidth,High) ;
+  //      qDebug()<<player->p[i]->x()<<player->p[i]->y();
+        player->CollidingRect[i] = player->iniCollingRect(player->p[i]->x()+30,player->p[i]->y()+20);
         High -=70;
         RandomWidth = rand() % GAME_WIDTH-50;
 

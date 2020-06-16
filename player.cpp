@@ -1,11 +1,14 @@
-#include "player.h"
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <QDebug>
 #include <QTimer>
+#include <QMediaPlayer>
+#include <QSoundEffect>
+#include "player.h"
 #include "Bullet.h"
 #include "Platform.h"
 #include "Transparent.h"
+
 
 Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 {
@@ -25,12 +28,15 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 
     JUMPHIGH = 5;
     count = 0;
-    state = 1;
+    state = 2;
     QTimer * timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
     timer->start(JUMPRATE);
 
           //  qDebug()<<state;
+
+  //  QMediaPlayer * music = new QMediaPlayer();
+
 
 
 
@@ -39,8 +45,35 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 //用火箭的時候自動跳躍要暫停
 void Player::move()
 {
-  //  qDebug()<<state;
+    if(y()<200)  //while裡面一個for?
+    {
+        dy = 300-y();
+        qDebug()<<"dy"<<dy;
+        for(int i = 0;i<10;i++)
+        {
+            for(int j = 0;j<5;j++)
+            {
+
+                p[i]->setY(p[i]->y()+JUMPHIGH);
+                CollidingRect[i]->setY(CollidingRect[i]->y()+JUMPHIGH);
+                setY(y()+JUMPHIGH);
+              //  qDebug()<<y();
+            }
+            if(CollidingRect[i]->y()>GAME_HEIGHT)
+            {
+                int High = 700;
+                int RandomWidth = rand() % GAME_WIDTH-50;
+            }
+        }
+
+    }
+    if(y()>500)
+    {
+
+    }
+
     JumpColliding();
+
     switch (state)
     {
         case 1:
@@ -70,16 +103,28 @@ void Player::JumpColliding()
     {
             if (typeid(*(colliding_items[i])) == typeid(Transparent) && state==2)  //down
             {
-                qDebug()<<"coll";
+                //qDebug()<<"coll";
                 count = 0;
                 state = 1;
+/*                QMediaPlayer * music = new QMediaPlayer();
+                music->setMedia(QUrl(":/sound/image/jumpSound.mp3"));
+                music->setVolume(1000);
+                if (music->state() == QMediaPlayer::PlayingState)
+                {
+                      music->setPosition(0);
+                }
+                else if (music->state() == QMediaPlayer::StoppedState)
+                {
+                    qDebug()<<"play";
+                      music->play();
+                }*/
+                QSoundEffect *sound;
+                sound = new QSoundEffect(this);
+                sound->setSource( QUrl(":/sound/image/jumpSound.mp3") );
+                sound->setVolume(10000);
+                sound->play();
+               // music->play();
                 //碰撞到板子 count=0 上升碰到平台return
-              //  AutoJump();
-          //      JUMPHIGH = 0;
-
-             //   jump();
-             //   timer->stop();
-
             }
             //switch ()
     }

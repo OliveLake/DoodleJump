@@ -4,6 +4,7 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QGraphicsItem>
+#include <QMediaPlayer>
 #include "Constants.h"
 #include "Platform.h"
 #include "Transparent.h"
@@ -26,11 +27,15 @@ public slots:
 public:
     Platform* iniPlatform(int x,int y);
     Transparent* iniCollingRect(int x,int y);
+    Platform* p[12];
+    Transparent* CollidingRect[12];
   //  QList<QGraphicsItem *> colliding_items ;
     int state;
 private:
     int count;
     int JUMPHIGH;
+    int dy;
+//    QMediaPlayer * music = new QMediaPlayer();
 
 
 };
