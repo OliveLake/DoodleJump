@@ -9,23 +9,14 @@
 #include "Platform.h"
 #include "Spring.h"
 #include "Transparent.h"
+#include "Gameover.h"
 
 
 Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 {
     QPixmap PlayerPixmap(":/new/prefix1/image/pngwing.com.png");
- //   PlayerPixmap.scaled(QSize(OBJ_SIZE,OBJ_SIZE),Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
-    qDebug()<<"playerset";
-//    setOffset(p_x,p_y);
-//    QPixmap scaled = PlayerPixmap.scaled(QSize(10, 10));
-//    QPainter painter(this);
-//    painter.drawPixmap(0, 0, scaled)
- //   QBrush brush(PlayerPixmap.scaled(2, 2, Qt::IgnoreAspectRatio,
- //                           Qt::FastTransformation));
     QPixmap pic(QPixmap(PlayerPixmap).scaled(OBJ_SIZE, OBJ_SIZE, Qt::IgnoreAspectRatio,Qt::FastTransformation));
     setPixmap(pic);
-
-//    colliding_items = collidingItems();
 
     count = 0;
     state = 2;
@@ -37,18 +28,51 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 
   //  QMediaPlayer * music = new QMediaPlayer();
 
+
+}
+void Player::ChangeCloth()
+{
+    QPixmap PlayerPixmap(":/new/prefix1/image/player2.png");
+    QPixmap pic(QPixmap(PlayerPixmap).scaled(OBJ_SIZE, OBJ_SIZE, Qt::IgnoreAspectRatio,Qt::FastTransformation));
+    setPixmap(pic);
 }
 void Player::iniScore()
 {
     score = new Score();
     score->setPos(GAME_WIDTH-100,0);
     scene()->addItem(score);
+    gameover = new Gameover();
+    gameover->setPos(GAME_WIDTH/3-50,GAME_HEIGHT/3);
+    scene()->addItem(gameover);
+    gameover->hide();
 }
 
 //用火箭的時候自動跳躍要暫停
 void Player::move()
 {
+    if(score->getScore()>100)  ChangeCloth();
+    if(y()>GAME_HEIGHT)
+    {
+        //暫停
+        gameover->show();
+    }
     //鑑測鍵盤狀態
+    if(y()<200)
+    {
+        JUMPHIGH = 1;
+        dy = 300-y();
+       // qDebug()<<"dy"<<dy;
+        for(int i = 0;i<10;i++)
+        {
+            p[i]->setY(p[i]->y()+JUMPHIGH);
+            CollidingRect[i]->setY(CollidingRect[i]->y()+JUMPHIGH);
+
+        }
+        setY(y()+JUMPHIGH);
+        qDebug()<<y();
+      //  return 1;
+    }
+
 
 
 
@@ -59,12 +83,12 @@ void Player::move()
     {
         case 1:
         {
-            checkposition = CheckPosition();
+           // checkposition = CheckPosition();
             JUMPHIGH = 5;//速度
            // qDebug()<<"state 1";
             if(count<=40 && state==1 )   //up
             {
-               if(CheckPosition())    qDebug()<<"dowm";
+               //if(CheckPosition())    qDebug()<<"dowm";
                 setPos(x(),y()-JUMPHIGH);
                 count++;
                 for(int i = 0;i<10;i++)
@@ -89,7 +113,7 @@ void Player::move()
     }
 }
 bool Player::CheckPosition()
-{
+{   /*
     if(y()<200)
     {
         JUMPHIGH = 1;
@@ -106,7 +130,7 @@ bool Player::CheckPosition()
       //  return 1;
     }
     return 0;
-
+*/
 }
 void Player::JumpColliding()
 {

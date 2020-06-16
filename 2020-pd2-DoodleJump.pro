@@ -27,6 +27,7 @@ CONFIG += c++11
 
 SOURCES += \
     Bullet.cpp \
+    Gameover.cpp \
     Platform.cpp \
         Player.cpp \
     Score.cpp \
@@ -38,6 +39,7 @@ SOURCES += \
 HEADERS += \
     Bullet.h \
     Constants.h \
+    Gameover.h \
     Platform.h \
         Player.h \
     Score.h \

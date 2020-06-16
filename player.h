@@ -10,6 +10,7 @@
 #include "Score.h"
 #include "Spring.h"
 #include "Transparent.h"
+#include "Gameover.h"
 
 
 
@@ -25,6 +26,7 @@ public:
     void jump();
      void JumpColliding();
      void iniScore();
+     void ChangeCloth();
 
 public slots:
     void spawn();
@@ -50,6 +52,7 @@ private:
     bool press_left;
     bool press_right;
     Score * score;
+    Gameover* gameover;
 
 //    QMediaPlayer * music = new QMediaPlayer();
 
