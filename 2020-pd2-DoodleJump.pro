@@ -29,6 +29,8 @@ SOURCES += \
     Bullet.cpp \
     Platform.cpp \
         Player.cpp \
+    Score.cpp \
+    Spring.cpp \
     Transparent.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -38,6 +40,8 @@ HEADERS += \
     Constants.h \
     Platform.h \
         Player.h \
+    Score.h \
+    Spring.h \
     Transparent.h \
         mainwindow.h \
 

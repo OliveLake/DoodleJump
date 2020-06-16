@@ -7,6 +7,7 @@
 #include "player.h"
 #include "Bullet.h"
 #include "Platform.h"
+#include "Spring.h"
 #include "Transparent.h"
 
 
@@ -26,7 +27,6 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 
 //    colliding_items = collidingItems();
 
-    JUMPHIGH = 5;
     count = 0;
     state = 2;
     QTimer * timer = new QTimer(this);
@@ -37,43 +37,21 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 
   //  QMediaPlayer * music = new QMediaPlayer();
 
-
-
-
+}
+void Player::iniScore()
+{
+    score = new Score();
+    score->setPos(GAME_WIDTH-100,0);
+    scene()->addItem(score);
 }
 
 //用火箭的時候自動跳躍要暫停
 void Player::move()
 {
     //鑑測鍵盤狀態
-    if(y()<200)  //while裡面一個for?
-    {
-        dy = 300-y();
-        qDebug()<<"dy"<<dy;
-        for(int i = 0;i<10;i++)
-        {
-            //for(int j = 0;j<10;j++)
-           // {
 
-                p[i]->setY(p[i]->y()+1);
-                CollidingRect[i]->setY(CollidingRect[i]->y()+1);
 
-          //  }
-            if(CollidingRect[i]->y()>GAME_HEIGHT)
-            {
-                int High = 700;
-                int RandomWidth = rand() % GAME_WIDTH-50;
-            }
 
-        }
-//state = 2;
-        setY(y()+1);
-      //  qDebug()<<y();
-    }
-    if(y()>500)
-    {
-
-    }
 
     JumpColliding();
 
@@ -81,23 +59,54 @@ void Player::move()
     {
         case 1:
         {
+            checkposition = CheckPosition();
+            JUMPHIGH = 5;//速度
            // qDebug()<<"state 1";
-            if(count<=40 && state==1)   //up
+            if(count<=40 && state==1 )   //up
             {
+               if(CheckPosition())    qDebug()<<"dowm";
                 setPos(x(),y()-JUMPHIGH);
                 count++;
+                for(int i = 0;i<10;i++)
+                {
+                    pX = p[i]->position();
+                    score->increase(pX);
+                 //  qDebug()<<p[i]->position();
+                    CollidingRect[i]->position(pX);
+                }
             }
            if(count==40) state = 2;
+
            break;
         }
 
         case 2:
         {
+            JUMPHIGH = 5;//速度
             setPos(x(),y()+JUMPHIGH);
-
             break;
         }
     }
+}
+bool Player::CheckPosition()
+{
+    if(y()<200)
+    {
+        JUMPHIGH = 1;
+        dy = 300-y();
+       // qDebug()<<"dy"<<dy;
+        for(int i = 0;i<10;i++)
+        {
+            p[i]->setY(p[i]->y()+JUMPHIGH);
+            CollidingRect[i]->setY(CollidingRect[i]->y()+JUMPHIGH);
+
+        }
+        setY(y()+JUMPHIGH);
+      //  qDebug()<<y();
+      //  return 1;
+    }
+    return 0;
+
 }
 void Player::JumpColliding()
 {
@@ -122,7 +131,7 @@ void Player::JumpColliding()
                 {
                     qDebug()<<"play";
                       music->play();
-                }/*
+                }*//*
                 QSoundEffect *sound;
                 sound = new QSoundEffect(this);
                 sound->setSource( QUrl(":/sound/image/jumpSound.mp3") );
@@ -142,12 +151,22 @@ void Player::JumpColliding()
 
 void Player::keyPressEvent(QKeyEvent *event){
     // move the player left and right
+  //  release_left = 1;
     if (event->key() == Qt::Key_Left){
+        if (pos().x() > 0)
+            setPos(x()-30,y());
+        if (pos().x() <= 0)
+            setPos(GAME_WIDTH,y());
+        //press_left = 1;
+    }
+/*    if(press_left && release_left)
+    {
+
         if (pos().x() > 0)
         setPos(x()-30,y());
         if (pos().x() <= 0)
         setPos(GAME_WIDTH,y());
-    }
+    }*/
     else if (event->key() == Qt::Key_Right){
         if (pos().x() + 100 < 800)
             setPos(x()+30,y());
@@ -163,10 +182,26 @@ void Player::keyPressEvent(QKeyEvent *event){
     }
 }
 
+/*void Player::keyReleaseEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Left){
+        release_left = 0;
+    }
+
+}*/
+
 void Player::spawn(){
     // create an enemy
     Platform * platform = new Platform();
     scene()->addItem(platform);
+}
+
+Spring* Player::iniSpring(int x,int y)
+{
+    Spring* spring = new Spring();
+    spring->setPos(x,y);
+    scene()->addItem(spring);
+    return spring;
 }
 
 Platform* Player::iniPlatform(int x,int y)  //  改回傳值
@@ -185,4 +220,5 @@ Transparent* Player::iniCollingRect(int x, int y)
     scene()->addItem(collidingrect);
     return collidingrect;
 }
+
 

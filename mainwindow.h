@@ -14,7 +14,7 @@
 #include "player.h"
 #include "Platform.h"
 #include "Transparent.h"
-//#include "Score.h"
+#include "Score.h"
 //#include "Health.h"
 
 class MainWindow:public QMainWindow
@@ -25,14 +25,13 @@ public:
 
 public slots:
     void AutoJump(int if_jump);
-
-
+    void onBnClicked();
 
 private:
     QGraphicsView *view;
     QGraphicsScene *scene;
     Player * player;
- //   Score * score;
+//    Score * score;
  //   Health * health;
 
     QPixmap BackgroundPixmap;
