@@ -126,6 +126,12 @@ void Player::JumpColliding()
                 music->setVolume(100);
                 //碰撞到板子 count=0 上升碰到平台return
             }
+            if (typeid(*(colliding_items[i])) == typeid(Monster))  //down
+            {
+                gameover->show();
+                isStop = true;
+                qDebug()<<"touch";
+            }
             //switch ()
     }
 }
