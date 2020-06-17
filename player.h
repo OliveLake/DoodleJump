@@ -21,7 +21,7 @@ public:
 
     void keyPressEvent(QKeyEvent * event);
 //    void keyReleaseEvent(QKeyEvent *event);
-    bool CheckPosition();
+    void checkMove();
     void standup();
     void jump();
      void JumpColliding();
@@ -36,13 +36,16 @@ public:
     Platform* iniPlatform(int x,int y);
     Transparent* iniCollingRect(int x,int y);
     Spring* iniSpring(int x,int y);
-    Platform* p[12];
-    Transparent* CollidingRect[12];
+    Platform* p[10];
     Spring* s[2];
   //  QList<QGraphicsItem *> colliding_items ;
     int state;
 private:
-    int count;
+    int playerState;
+    int playerSpeed = 5;
+    int playerCount = 0;
+    int playerSpringcount;
+    int cameraSpeed = 0;
     int JUMPHIGH;
     int dy;
     int pX;

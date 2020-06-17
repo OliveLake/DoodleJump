@@ -4,6 +4,7 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QGraphicsItem>
+#include "Transparent.h"
 
 class Platform: public QObject,public QGraphicsPixmapItem{
     Q_OBJECT
@@ -11,8 +12,10 @@ public:
     Platform(QGraphicsItem * parent=0);
     int dy;
     int randomX;
+    Transparent* Col;
+
 public slots:
-    int position();
+    void position();
 };
 
 

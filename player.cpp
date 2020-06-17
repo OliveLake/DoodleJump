@@ -18,17 +18,10 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
     QPixmap pic(QPixmap(PlayerPixmap).scaled(OBJ_SIZE, OBJ_SIZE, Qt::IgnoreAspectRatio,Qt::FastTransformation));
     setPixmap(pic);
 
-    count = 0;
     state = 2;
     QTimer * timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
-    timer->start(JUMPRATE);
-
-          //  qDebug()<<state;
-
-  //  QMediaPlayer * music = new QMediaPlayer();
-
-
+    timer->start(JUMPRATE);        
 }
 void Player::ChangeCloth()
 {
@@ -47,90 +40,61 @@ void Player::iniScore()
     gameover->hide();
 }
 
-//用火箭的時候自動跳躍要暫停
 void Player::move()
 {
-    if(score->getScore()>100)  ChangeCloth();
-    if(y()>GAME_HEIGHT)
-    {
-        //暫停
-        gameover->show();
-    }
-    //鑑測鍵盤狀態
-    if(y()<200)
-    {
-        JUMPHIGH = 1;
-        dy = 300-y();
-       // qDebug()<<"dy"<<dy;
-        for(int i = 0;i<10;i++)
-        {
-            p[i]->setY(p[i]->y()+JUMPHIGH);
-            CollidingRect[i]->setY(CollidingRect[i]->y()+JUMPHIGH);
+    dy = y();
+    if(dy<=GAME_HEIGHT*0.3)     cameraSpeed = 3;
+    else if(dy<=GAME_HEIGHT*0.2)    cameraSpeed = 5;
+    else if(dy<=GAME_HEIGHT*0.1)    cameraSpeed = 6;
+    else if(dy<=GAME_HEIGHT*0.05)   cameraSpeed= 7;
+    else    cameraSpeed = 0;
 
-        }
-        setY(y()+JUMPHIGH);
-        qDebug()<<y();
-      //  return 1;
-    }
-
-
-
-
-
+    checkMove();
     JumpColliding();
 
     switch (state)
     {
         case 1:
         {
-           // checkposition = CheckPosition();
-            JUMPHIGH = 5;//速度
-           // qDebug()<<"state 1";
-            if(count<=40 && state==1 )   //up
+            if(playerCount<=40 && state==1 )   //up
             {
-               //if(CheckPosition())    qDebug()<<"dowm";
-                setPos(x(),y()-JUMPHIGH);
-                count++;
-                for(int i = 0;i<10;i++)
-                {
-                    pX = p[i]->position();
-                    score->increase(pX);
-                 //  qDebug()<<p[i]->position();
-                    CollidingRect[i]->position(pX);
-                }
+                setPos(x(),y()-playerSpeed);
+                playerCount++;
             }
-           if(count==40) state = 2;
-
+           if(playerCount==40) state = 2;
            break;
         }
-
         case 2:
         {
-            JUMPHIGH = 5;//速度
-            setPos(x(),y()+JUMPHIGH);
+            setPos(x(),y()+playerSpeed);
             break;
         }
     }
-}
-bool Player::CheckPosition()
-{   /*
-    if(y()<200)
+
+    if(score->getScore()>3000)  ChangeCloth();
+    if(y()>GAME_HEIGHT)
     {
-        JUMPHIGH = 1;
-        dy = 300-y();
-       // qDebug()<<"dy"<<dy;
+        //暫停
+        gameover->show();
+    }
+}
+void Player::checkMove()
+{
         for(int i = 0;i<10;i++)
         {
-            p[i]->setY(p[i]->y()+JUMPHIGH);
-            CollidingRect[i]->setY(CollidingRect[i]->y()+JUMPHIGH);
-
+            p[i]->setY(p[i]->y()+cameraSpeed);
+            qDebug()<<"plat"<<p[i]->y();
+            p[i]->Col->setY(p[i]->y()+cameraSpeed+20);
+   //         qDebug()<<"rect"<<p[i]->CollidingRect->y();
+         //   p[i]->position();
+       //     p[i]->CollidingRect->position();
+            score->increase();
+         //   qDebug()<<"pX"<<pX;
+        //    CollidingRect[i]->position(pX);
+ //          if(i == 4 )   s[0]->position(pX);
+ //           if(i == 9 )   s[1]->position(pX);
         }
-        setY(y()+JUMPHIGH);
-      //  qDebug()<<y();
-      //  return 1;
-    }
-    return 0;
-*/
+        setY(y()+cameraSpeed);
 }
 void Player::JumpColliding()
 {
@@ -139,37 +103,17 @@ void Player::JumpColliding()
     {
             if (typeid(*(colliding_items[i])) == typeid(Transparent) && state==2)  //down
             {
-                //qDebug()<<"coll";
-                count = 0;
+                playerCount = 0;
                 state = 1;
                 QMediaPlayer * music = new QMediaPlayer();
-         //       music->setMedia(QUrl(":/sound/image/jumpSound.mp3"));
-                music->setMedia(QUrl::fromLocalFile("/Users/User/Desktop/C++/2020-pd2-doodlejump/image/jumpSound.mp3"));
+                //music->setMedia(QUrl::fromLocalFile("/Users/User/Desktop/C++/2020-pd2-doodlejump/image/jumpSound.mp3"));
+                music->setMedia(QUrl("/sound/image/jumpSound.mp3"));
                 music->play();
-                music->setVolume(100);/*
-                if (music->state() == QMediaPlayer::PlayingState)
-                {
-                      music->setPosition(0);
-                }
-                else if (music->state() == QMediaPlayer::StoppedState)
-                {
-                    qDebug()<<"play";
-                      music->play();
-                }*//*
-                QSoundEffect *sound;
-                sound = new QSoundEffect(this);
-                sound->setSource( QUrl(":/sound/image/jumpSound.mp3") );
-                sound->setVolume(100);
-                sound->play();
-                */
-               // music->play();
+                music->setVolume(100);
                 //碰撞到板子 count=0 上升碰到平台return
             }
             //switch ()
     }
-
-
-
 }
 
 
@@ -231,9 +175,13 @@ Spring* Player::iniSpring(int x,int y)
 Platform* Player::iniPlatform(int x,int y)  //  改回傳值
 {
     Platform * platform = new Platform();
+    Transparent* CollidingRect = new Transparent();
   //  p[0] = new Platform()
     platform->setPos(x,y);
     scene()->addItem(platform); //把平台存在陣列   a[0].y();
+    scene()->addItem(CollidingRect);
+    platform->Col = CollidingRect;
+    platform->Col->setPos(x+60,y+20);
     return platform;
 }
 

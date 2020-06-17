@@ -1,6 +1,6 @@
-#include "Platform.h"
+#include "Transparent.h"
 #include "Constants.h"
-#include "player.h"
+#include "Platform.h"
 #include <QGraphicsScene>
 #include <QList>
 #include <QTimer>
@@ -20,28 +20,26 @@ Platform::Platform(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent
 
     QTimer * timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(position()));
-
     timer->start(JUMPRATE);
-
+    Transparent* Col = new Transparent();
 }
 
-int Platform::position()
-{
-    qsrand(time(NULL));
+void Platform::position()
+{   
     dy = y()-700;
+    qsrand(time(NULL));
     if(y()>700)
     {
-
         randomX = rand() % GAME_WIDTH;
         while(randomX<-20 || randomX > 350)
            randomX = rand() % GAME_WIDTH;
         setPos(randomX,dy);
-        qDebug()<<randomX<<"plat:"<<x()<<y();
-        return randomX;
+        Col->setPos(randomX+60,dy+20) ;
+     //   qDebug()<<"plat:"<<x()<<y();
+        qDebug()<<randomX;
 
-    }
+     }
 
-    return 0;
 
 }
 //移動的函數 每一次都要確定最後y是否低於底部

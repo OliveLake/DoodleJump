@@ -10,7 +10,7 @@ class Transparent: public QObject,public QGraphicsRectItem{
     Q_OBJECT
 public:
     Transparent(QGraphicsItem * parent=0);
-    void position(int x);
+    void position();
     int dy;
     int randomX;
 };

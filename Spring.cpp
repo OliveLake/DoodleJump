@@ -12,3 +12,13 @@ Spring::Spring(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
      QPixmap pic(QPixmap(Pixmap).scaled(30, 30, Qt::IgnoreAspectRatio,Qt::FastTransformation));
      setPixmap(pic);
 }
+void Spring::position(int sx)
+{
+    dy = y()-700;
+    if(y()>500)
+    {
+        setPos(sx+60,dy);
+  //      qDebug()<<"spring:"<<x()<<y();
+
+    }
+}

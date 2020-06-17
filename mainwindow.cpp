@@ -7,6 +7,7 @@
 #include <QImage>
 #include <QDebug>
 #include <QThread>
+#include <QApplication>
 
 //bonus
 //反轉圖片
@@ -21,11 +22,8 @@ MainWindow::MainWindow(QWidget *parent)
     ,scene(new QGraphicsScene(this))
     , BackgroundPixmap(":/new/prefix1/image/temp1406589445.png")
 {
-
-
     Btn=new QPushButton(QString("Pause"),this);
-    connect(Btn,SIGNAL(clicked()),this,SLOT(onBnClicked()));
-
+    connect(Btn,&QAbstractButton::clicked,this,&MainWindow::onBnClicked);
     scene->setBackgroundBrush(QBrush(QImage(":/new/prefix1/image/temp1406589445.png")));
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -60,22 +58,17 @@ MainWindow::MainWindow(QWidget *parent)
     int RandomWidth = rand() % GAME_WIDTH-50;
     for(int i = 0;i<10;i++)
     {
-
         player->p[i] = player->iniPlatform(RandomWidth,High) ;
-  //      qDebug()<<player->p[i]->x()<<player->p[i]->y();
-        player->CollidingRect[i] = player->iniCollingRect(player->p[i]->x()+60,player->p[i]->y()+20);
         High -=70;
         RandomWidth = rand() % GAME_WIDTH-50;
-
-            qDebug()<<player->p[i]->x()<<player->p[i]->y();
-            qDebug()<<player->CollidingRect[i]->x()<<player->CollidingRect[i]->y();
     }
-    for(int i = 0;i<2;i++)
-    {
-        player->s[i] = player->iniSpring(player->CollidingRect[i+6]->x(),player->CollidingRect[i+6]->y()-30);
-        qDebug()<<"spring"<< player->s[i]->x()<<player->s[i]->y();
 
-    }
+      //  player->s[0] = player->iniSpring(player->CollidingRect[4]->x(),player->CollidingRect[4]->y()-30);
+      //  player->s[1] = player->iniSpring(player->CollidingRect[9]->x(),player->CollidingRect[9]->y()-30);
+
+
+
+
 
  //   view->show();
 
@@ -94,9 +87,11 @@ void MainWindow::paintEvent(QPaintEvent *)
 
 void MainWindow::onBnClicked()
 {
-   // QThread::sleep(10000000);
-    qDebug()<<"sleep";
-    setFocus();
+    QThread::sleep(10000000);
+   //  QApplication* app;
+   //     app->quit();
+   // qDebug()<<"sleep";
+   // setFocus();
 }
 
 

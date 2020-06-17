@@ -8,6 +8,10 @@ class Spring: public QObject,public QGraphicsPixmapItem{
     Q_OBJECT
 public:
     Spring(QGraphicsItem * parent=0);
+    int dy;
+    void position(int x);
+
+
 public slots:
 
 };
