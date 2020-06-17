@@ -28,6 +28,8 @@ CONFIG += c++11
 SOURCES += \
     Bullet.cpp \
     Gameover.cpp \
+    Monster.cpp \
+    MovePlatform.cpp \
     Platform.cpp \
         Player.cpp \
     Score.cpp \
@@ -40,6 +42,8 @@ HEADERS += \
     Bullet.h \
     Constants.h \
     Gameover.h \
+    Monster.h \
+    MovePlatform.h \
     Platform.h \
         Player.h \
     Score.h \

@@ -18,9 +18,9 @@ Platform::Platform(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent
 
     setPixmap(QPixmap(":/new/prefix1/image/platforms_green.png"));
 
-    QTimer * timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(position()));
-    timer->start(JUMPRATE);
+ //   QTimer * timer = new QTimer(this);
+ //   connect(timer,SIGNAL(timeout()),this,SLOT(position()));
+  //  timer->start(JUMPRATE);
     Transparent* Col = new Transparent();
 }
 
@@ -36,7 +36,7 @@ void Platform::position()
         setPos(randomX,dy);
         Col->setPos(randomX+60,dy+20) ;
      //   qDebug()<<"plat:"<<x()<<y();
-        qDebug()<<randomX;
+     //   qDebug()<<randomX;
 
      }
 

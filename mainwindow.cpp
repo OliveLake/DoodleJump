@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-    player->iniScore();
+
     // create the score/health
 /*    score = new Score();
     scene->addItem(score);
@@ -62,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
         High -=70;
         RandomWidth = rand() % GAME_WIDTH-50;
     }
+    player->iniScore();
 
       //  player->s[0] = player->iniSpring(player->CollidingRect[4]->x(),player->CollidingRect[4]->y()-30);
       //  player->s[1] = player->iniSpring(player->CollidingRect[9]->x(),player->CollidingRect[9]->y()-30);
@@ -87,11 +88,12 @@ void MainWindow::paintEvent(QPaintEvent *)
 
 void MainWindow::onBnClicked()
 {
-    QThread::sleep(10000000);
+  //  QThread::sleep(10000000);
    //  QApplication* app;
    //     app->quit();
    // qDebug()<<"sleep";
    // setFocus();
+    player->isStop = true;
 }
 
 

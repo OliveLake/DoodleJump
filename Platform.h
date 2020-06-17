@@ -13,9 +13,7 @@ public:
     int dy;
     int randomX;
     Transparent* Col;
-
-public slots:
-    void position();
+    virtual void position() ;
 };
 
 

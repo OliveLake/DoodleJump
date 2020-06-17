@@ -11,6 +11,7 @@
 #include "Spring.h"
 #include "Transparent.h"
 #include "Gameover.h"
+#include "Monster.h"
 
 
 
@@ -40,6 +41,7 @@ public:
     Spring* s[2];
   //  QList<QGraphicsItem *> colliding_items ;
     int state;
+    bool  isStop=false;
 private:
     int playerState;
     int playerSpeed = 5;
@@ -56,7 +58,7 @@ private:
     bool press_right;
     Score * score;
     Gameover* gameover;
-
+    Monster* monster;
 //    QMediaPlayer * music = new QMediaPlayer();
 
 

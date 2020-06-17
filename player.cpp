@@ -34,59 +34,66 @@ void Player::iniScore()
     score = new Score();
     score->setPos(GAME_WIDTH-100,0);
     scene()->addItem(score);
+    monster = new Monster();
+    monster->setPos(200,200);
+    scene()->addItem(monster);
     gameover = new Gameover();
     gameover->setPos(GAME_WIDTH/3-50,GAME_HEIGHT/3);
     scene()->addItem(gameover);
     gameover->hide();
+
 }
 
 void Player::move()
 {
-    dy = y();
-    if(dy<=GAME_HEIGHT*0.3)     cameraSpeed = 3;
-    else if(dy<=GAME_HEIGHT*0.2)    cameraSpeed = 5;
-    else if(dy<=GAME_HEIGHT*0.1)    cameraSpeed = 6;
-    else if(dy<=GAME_HEIGHT*0.05)   cameraSpeed= 7;
-    else    cameraSpeed = 0;
-
-    checkMove();
-    JumpColliding();
-
-    switch (state)
+    if(!isStop)
     {
-        case 1:
+        dy = y();
+        if(dy<=GAME_HEIGHT*0.3)     cameraSpeed = 3;
+        else if(dy<=GAME_HEIGHT*0.2)    cameraSpeed = 5;
+        else if(dy<=GAME_HEIGHT*0.1)    cameraSpeed = 6;
+        else if(dy<=GAME_HEIGHT*0.05)   cameraSpeed= 7;
+        else    cameraSpeed = 0;
+
+        checkMove();
+        JumpColliding();
+
+        switch (state)
         {
-            if(playerCount<=40 && state==1 )   //up
+            case 1:
             {
-                setPos(x(),y()-playerSpeed);
-                playerCount++;
+                if(playerCount<=40 && state==1 )   //up
+                {
+                    setPos(x(),y()-playerSpeed);
+                    playerCount++;
+                }
+               if(playerCount==40) state = 2;
+               break;
             }
-           if(playerCount==40) state = 2;
-           break;
+            case 2:
+            {
+                setPos(x(),y()+playerSpeed);
+                break;
+            }
         }
-        case 2:
-        {
-            setPos(x(),y()+playerSpeed);
-            break;
-        }
-    }
 
-    if(score->getScore()>3000)  ChangeCloth();
-    if(y()>GAME_HEIGHT)
-    {
-        //暫停
-        gameover->show();
-    }
+        if(score->getScore()>3000)  ChangeCloth();
+        if(y()>GAME_HEIGHT)
+        {
+            //暫停
+            gameover->show();
+        }
+     }
 }
 void Player::checkMove()
 {
         for(int i = 0;i<10;i++)
         {
             p[i]->setY(p[i]->y()+cameraSpeed);
-            qDebug()<<"plat"<<p[i]->y();
+          //  qDebug()<<"plat"<<p[i]->y();
             p[i]->Col->setY(p[i]->y()+cameraSpeed+20);
    //         qDebug()<<"rect"<<p[i]->CollidingRect->y();
-         //   p[i]->position();
+            p[i]->position();
        //     p[i]->CollidingRect->position();
             score->increase();
          //   qDebug()<<"pX"<<pX;
@@ -147,6 +154,7 @@ void Player::keyPressEvent(QKeyEvent *event){
         Bullet * bullet = new Bullet();
         bullet->setPos(x(),y());
         scene()->addItem(bullet);
+        bullet->mon = monster;
     }
 }
 

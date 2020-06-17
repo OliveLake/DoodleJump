@@ -8,5 +8,4 @@
 #define GAME_TITLE "Doodle JuJuJump"
 #define JUMPRATE   20
 
-
 #endif // CONSTANTS_H
