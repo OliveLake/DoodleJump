@@ -9,6 +9,7 @@
         <file>image/gameover</file>
         <file>image/blue_monster_left.png</file>
         <file>image/blue_platforms.png</file>
+        <file>image/pngwing.reverse.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>image/jumpSound.mp3</file>

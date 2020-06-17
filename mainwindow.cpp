@@ -25,6 +25,10 @@ MainWindow::MainWindow(QWidget *parent)
     Btn=new QPushButton(QString("Pause"),this);
     Btn->setGeometry(10,10,100,50);
     connect(Btn,&QAbstractButton::clicked,this,&MainWindow::onBnClicked);
+    Ptn=new QPushButton(QString("Start"),this);
+    Ptn->setGeometry(100,10,100,50);
+    connect(Ptn,&QAbstractButton::clicked,this,&MainWindow::onPnClicked);
+
     scene->setBackgroundBrush(QBrush(QImage(":/new/prefix1/image/temp1406589445.png")));
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -54,17 +58,6 @@ MainWindow::MainWindow(QWidget *parent)
     scene->addItem(player);
 
 
-
-
-    // create the score/health
-/*    score = new Score();
-    scene->addItem(score);
-    score->setPos(GAME_WIDTH-100,0);
-    health = new Health();
-    health->setPos(health->x(),health->y()+25);
-    scene->addItem(health);
-*/
-
     int High = 700;
     int RandomWidth = rand() % GAME_WIDTH-50;
     for(int i = 0;i<10;i++)
@@ -73,8 +66,8 @@ MainWindow::MainWindow(QWidget *parent)
         High -=70;
         RandomWidth = rand() % GAME_WIDTH-50;
     }
-    player->score = score;
     player->gameover = gameover;
+    player->score = score;
     player->iniScore();
       //  player->s[0] = player->iniSpring(player->CollidingRect[4]->x(),player->CollidingRect[4]->y()-30);
       //  player->s[1] = player->iniSpring(player->CollidingRect[9]->x(),player->CollidingRect[9]->y()-30);
@@ -106,6 +99,16 @@ void MainWindow::onBnClicked()
    // qDebug()<<"sleep";
    // setFocus();
     player->isStop = true;
+
+}
+void MainWindow::onPnClicked()
+{
+  //  QThread::sleep(10000000);
+   //  QApplication* app;
+   //     app->quit();
+   // qDebug()<<"sleep";
+   // setFocus();
+    player->isStop = false;
 }
 
 

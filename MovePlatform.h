@@ -10,8 +10,8 @@ class MovePlatform: public Platform{
 public:
     MovePlatform(QGraphicsItem * parent=0);
     void position() override;
-//public slots:
- //   void position();
+public slots:
+  //  void position() override;
 };
 
 

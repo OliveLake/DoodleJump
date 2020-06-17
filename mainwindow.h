@@ -27,6 +27,7 @@ public:
 public slots:
     void AutoJump(int if_jump);
     void onBnClicked();
+    void onPnClicked();
 
 private:
     QGraphicsView *view;
@@ -39,6 +40,7 @@ private:
     QGraphicsPixmapItem item;
 
     QPushButton *Btn;
+    QPushButton *Ptn;
     int p_x;
     int p_y;
 

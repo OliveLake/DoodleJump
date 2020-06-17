@@ -23,9 +23,9 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
     QTimer * timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
     timer->start(JUMPRATE);
-    Platform * movePlat = new MovePlatform();
-    movePlat->setPos(200,200);
-    scene()->addItem(movePlat);
+//    Platform * movePlat = new MovePlatform();
+//    movePlat->setPos(200,200);
+//    scene()->addItem(movePlat);
 }
 void Player::ChangeCloth()
 {
@@ -47,7 +47,12 @@ void Player::iniScore()
     gameover->setPos(GAME_WIDTH/3-50,GAME_HEIGHT/3);
     scene()->addItem(gameover);
     gameover->hide();
-*/
+    */
+    Platform * movePlat = new MovePlatform();
+    movePlat->setPos(400,550);
+    scene()->addItem(movePlat);
+//    for(int i = 0;i < 10 ;i++)
+ //       movePlat->position();
 }
 
 void Player::move()
@@ -109,6 +114,7 @@ void Player::checkMove()
  //           if(i == 9 )   s[1]->position(pX);
         }
         setY(y()+cameraSpeed);
+     //   movePlat->position();
 }
 void Player::JumpColliding()
 {
@@ -146,6 +152,9 @@ void Player::keyPressEvent(QKeyEvent *event){
         if (pos().x() <= 0)
             setPos(GAME_WIDTH,y());
         //press_left = 1;
+        QPixmap PlayerPixmap(":/new/prefix1/image/pngwing.reverse.png");
+        QPixmap pic(QPixmap(PlayerPixmap).scaled(OBJ_SIZE, OBJ_SIZE, Qt::IgnoreAspectRatio,Qt::FastTransformation));
+        setPixmap(pic);
     }
 /*    if(press_left && release_left)
     {
@@ -160,6 +169,9 @@ void Player::keyPressEvent(QKeyEvent *event){
             setPos(x()+30,y());
         if (pos().x() > GAME_WIDTH)
             setPos(0,y());
+        QPixmap PlayerPixmap(":/new/prefix1/image/pngwing.com.png");
+        QPixmap pic(QPixmap(PlayerPixmap).scaled(OBJ_SIZE, OBJ_SIZE, Qt::IgnoreAspectRatio,Qt::FastTransformation));
+        setPixmap(pic);
     }
     // shoot with the spacebar
     else if (event->key() == Qt::Key_Space){

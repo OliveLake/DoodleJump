@@ -44,6 +44,7 @@ public:
     bool  isStop=false;
     Score * score;
     Gameover* gameover;
+    Platform * movePlat;
 private:
     int playerState;
     int playerSpeed = 5;
