@@ -10,6 +10,7 @@
 #include "Spring.h"
 #include "Transparent.h"
 #include "Gameover.h"
+#include "MovePlatform.h"
 
 
 Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
@@ -21,7 +22,10 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
     state = 2;
     QTimer * timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
-    timer->start(JUMPRATE);        
+    timer->start(JUMPRATE);
+    Platform * movePlat = new MovePlatform();
+    movePlat->setPos(200,200);
+    scene()->addItem(movePlat);
 }
 void Player::ChangeCloth()
 {
@@ -84,7 +88,7 @@ void Player::move()
         {
             gameover->show();
             isStop = true;
-            score->setPos(GAME_WIDTH/3-50,GAME_HEIGHT/3);
+           // score->setPos(GAME_WIDTH/3-50,GAME_HEIGHT/3);
         }
      }
 }
