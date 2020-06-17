@@ -22,7 +22,8 @@ class MainWindow:public QMainWindow
 public:
     MainWindow(QWidget * parent=0);
     void paintEvent(QPaintEvent *);
-
+    Score * score;
+    Gameover* gameover;
 public slots:
     void AutoJump(int if_jump);
     void onBnClicked();

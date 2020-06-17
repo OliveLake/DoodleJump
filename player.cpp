@@ -29,19 +29,21 @@ void Player::ChangeCloth()
     QPixmap pic(QPixmap(PlayerPixmap).scaled(OBJ_SIZE, OBJ_SIZE, Qt::IgnoreAspectRatio,Qt::FastTransformation));
     setPixmap(pic);
 }
+
 void Player::iniScore()
 {
-    score = new Score();
-    score->setPos(GAME_WIDTH-100,0);
-    scene()->addItem(score);
     monster = new Monster();
     monster->setPos(200,200);
     scene()->addItem(monster);
+    /*
+    score = new Score();
+    score->setPos(GAME_WIDTH-100,0);
+    scene()->addItem(score);
     gameover = new Gameover();
     gameover->setPos(GAME_WIDTH/3-50,GAME_HEIGHT/3);
     scene()->addItem(gameover);
     gameover->hide();
-
+*/
 }
 
 void Player::move()
@@ -80,8 +82,9 @@ void Player::move()
         if(score->getScore()>3000)  ChangeCloth();
         if(y()>GAME_HEIGHT)
         {
-            //暫停
             gameover->show();
+            isStop = true;
+            score->setPos(GAME_WIDTH/3-50,GAME_HEIGHT/3);
         }
      }
 }

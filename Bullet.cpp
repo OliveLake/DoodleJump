@@ -37,8 +37,8 @@ void Bullet::collid()
    {
            if (typeid(*(colliding_items[i])) == typeid(Monster) )  //down
            {
-               qDebug();
-               // monster->hide();
+               //qDebug()<<"mon";
+                mon->hide();
            }
            //switch ()
    }

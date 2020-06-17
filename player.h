@@ -42,6 +42,8 @@ public:
   //  QList<QGraphicsItem *> colliding_items ;
     int state;
     bool  isStop=false;
+    Score * score;
+    Gameover* gameover;
 private:
     int playerState;
     int playerSpeed = 5;
@@ -56,8 +58,7 @@ private:
     bool release_right;
     bool press_left;
     bool press_right;
-    Score * score;
-    Gameover* gameover;
+
     Monster* monster;
 //    QMediaPlayer * music = new QMediaPlayer();
 

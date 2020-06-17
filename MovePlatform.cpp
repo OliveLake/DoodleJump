@@ -1,7 +1,11 @@
 #include "MovePlatform.h"
-
-//MovePlatform::MovePlatform(QGraphicsItem *parent): platform
-//void override position()
-//{
-
-//}
+#include "Platform.h"
+#include <QDebug>
+MovePlatform::MovePlatform(QGraphicsItem *parent): Platform()
+{
+        setPixmap(QPixmap(":/new/prefix1/image/blue_platforms.png"));
+}
+void MovePlatform::position()
+{
+        qDebug()<<"override";
+}
