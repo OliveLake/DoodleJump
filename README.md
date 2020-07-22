@@ -1,7 +1,5 @@
 # 2020-pd2-DoodleJump
 
-## Video link
-## How to play
-## Requirements
-## Polymorphism
-## Bonus
+## How to play : use keypoard to control player 
+## Polymorphism : implement polymorphism by boards with different colors
+## Bonus : Rockey,Spring,BGM
